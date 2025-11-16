@@ -11,7 +11,6 @@ const chefs = [
     prepTime: '30 – 40 mins',
     deliveryFee: '$1.99 Delivery Fee',
     rating: 9.7,
-    promo: 'Buy One, Get One',
     img: '/placeholder1.jpg'
   },
   {
@@ -20,8 +19,7 @@ const chefs = [
     prepTime: '35 – 45 mins',
     deliveryFee: '$0 Delivery Fee Over $25',
     rating: 9.3,
-    promo: 'Buy 1, get 1 free',
-    img: '/placeholder2.jpg'
+    img: '/placeholder1.jpg'
   },
   {
     id: 3,
@@ -29,8 +27,7 @@ const chefs = [
     prepTime: '40 – 55 mins',
     deliveryFee: '$1.49 Delivery Fee',
     rating: 9.5,
-    promo: 'Limited Offer',
-    img: '/placeholder3.jpg'
+    img: '/placeholder1.jpg'
   },
 ];
 
@@ -41,7 +38,7 @@ const nationalFaves = [
     prepTime: '25 – 35 mins',
     deliveryFee: '$0.99 Delivery Fee',
     rating: 9.9,
-    img: '/placeholder4.jpg'
+    img: '/placeholder1.jpg'
   },
   {
     id: 5,
@@ -49,7 +46,7 @@ const nationalFaves = [
     prepTime: '30 – 40 mins',
     deliveryFee: '$0.79 Delivery Fee',
     rating: 9.4,
-    img: '/placeholder5.jpg'
+    img: '/placeholder1.jpg'
   },
   {
     id: 6,
@@ -57,7 +54,7 @@ const nationalFaves = [
     prepTime: '30 – 40 mins',
     deliveryFee: '$0.79 Delivery Fee',
     rating: 9.3,
-    img: '/placeholder6.jpg'
+    img: '/placeholder1.jpg'
   },
 ];
 
@@ -69,81 +66,82 @@ export default function ChefsUpPage() {
     <div className="w-full min-h-screen bg-gray-50">
       <Header search={search} onSearchChange={handleSearchChange} />
 
-      {/* Featured Section */}
-      <div className="px-6 mt-6">
-        <h2 className="text-xl font-semibold mb-3">Featured Home Chefs</h2>
+      <main className="mx-auto w-full max-w-6xl px-4 pb-16 pt-8 md:px-6">
+        {/* Featured Section */}
+        <section>
+          <h2 className="text-2xl font-semibold text-gray-900">Featured Home Chefs</h2>
+          <p className="mt-1 text-sm text-gray-500">Handpicked options curated for tonight.</p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {chefs.map((chef) => (
-            <div
-              key={chef.id}
-              className="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-200 hover:shadow-md transition"
-            >
-              <div className="relative w-full h-44">
-                <Image
-                  src={chef.img}
-                  alt={chef.name}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute top-2 left-2 bg-yellow-400 text-xs px-2 py-1 rounded-md font-semibold">
-                  {chef.promo}
+          <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {chefs.map((chef) => (
+              <div
+                key={chef.id}
+                className="overflow-hidden rounded-3xl border border-gray-100 bg-white/90 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
+              >
+                <div className="relative h-36 w-full">
+                  <Image
+                    src={chef.img}
+                    alt={chef.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+
+                <div className="space-y-2 p-5">
+                  <h3 className="text-lg font-semibold text-gray-900">{chef.name}</h3>
+                  <p className="text-sm text-gray-600">{chef.prepTime}</p>
+                  <p className="text-sm text-gray-600">{chef.deliveryFee}</p>
+
+                  <div className="mt-3 flex items-center gap-2 text-sm">
+                    <span className="text-orange-500">★</span>
+                    <span className="font-semibold text-gray-900">{chef.rating}</span>
+                  </div>
                 </div>
               </div>
+            ))}
+          </div>
+        </section>
 
-              <div className="p-4">
-                <h3 className="text-lg font-semibold">{chef.name}</h3>
-                <p className="text-sm text-gray-600 mt-1">{chef.prepTime}</p>
-                <p className="text-sm text-gray-600">{chef.deliveryFee}</p>
-
-                <div className="mt-2 flex items-center gap-2">
-                  <span className="text-orange-500 text-lg">★</span>
-                  <span className="font-semibold">{chef.rating}</span>
-                </div>
-              </div>
+        {/* National Faves Section */}
+        <section className="mt-12">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="text-2xl font-semibold text-gray-900">Popular on ChefsUp</h2>
+              <p className="mt-1 text-sm text-gray-500">National favourites everyone is loving.</p>
             </div>
-          ))}
-        </div>
-      </div>
+            <button className="text-sm font-semibold text-orange-500">View All</button>
+          </div>
 
+          <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {nationalFaves.map((item) => (
+              <div
+                key={item.id}
+                className="overflow-hidden rounded-3xl border border-gray-100 bg-white/90 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
+              >
+                <div className="relative h-36 w-full">
+                  <Image
+                    src={item.img}
+                    alt={item.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
 
-      {/* National Faves Section */}
-      <div className="px-6 mt-10 mb-10">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Popular on ChefsUp</h2>
-          <button className="text-orange-500 text-sm font-semibold">View All</button>
-        </div>
+                <div className="space-y-2 p-5">
+                  <h3 className="text-lg font-semibold text-gray-900">{item.name}</h3>
+                  <p className="text-sm text-gray-600">{item.prepTime}</p>
+                  <p className="text-sm text-gray-600">{item.deliveryFee}</p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-4">
-          {nationalFaves.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-200 hover:shadow-md transition"
-            >
-              <div className="relative w-full h-44">
-                <Image
-                  src={item.img}
-                  alt={item.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="p-4">
-                <h3 className="text-lg font-semibold">{item.name}</h3>
-                <p className="text-sm text-gray-600 mt-1">{item.prepTime}</p>
-                <p className="text-sm text-gray-600">{item.deliveryFee}</p>
-
-                <div className="mt-2 flex items-center gap-2">
-                  <span className="text-orange-500 text-lg">★</span>
-                  <span className="font-semibold">{item.rating}</span>
+                  <div className="mt-3 flex items-center gap-2 text-sm">
+                    <span className="text-orange-500">★</span>
+                    <span className="font-semibold text-gray-900">{item.rating}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
+            ))}
+          </div>
+        </section>
+      </main>
     </div>
   );
 }
