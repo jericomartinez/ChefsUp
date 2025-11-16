@@ -1,66 +1,45 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import Header from '@/app/components/Header';
-
-const chefs = [
-  {
-    id: 1,
-    name: 'Homestyle Ramen by Aiko',
-    prepTime: '30 – 40 mins',
-    deliveryFee: '$1.99 Delivery Fee',
-    rating: 9.7,
-    img: '/placeholder1.jpg'
-  },
-  {
-    id: 2,
-    name: 'Vegan Bento by Mira',
-    prepTime: '35 – 45 mins',
-    deliveryFee: '$0 Delivery Fee Over $25',
-    rating: 9.3,
-    img: '/placeholder1.jpg'
-  },
-  {
-    id: 3,
-    name: 'Sushi Rolls by Kenji',
-    prepTime: '40 – 55 mins',
-    deliveryFee: '$1.49 Delivery Fee',
-    rating: 9.5,
-    img: '/placeholder1.jpg'
-  },
-];
-
-const nationalFaves = [
-  {
-    id: 4,
-    name: 'Pizza by Sofia',
-    prepTime: '25 – 35 mins',
-    deliveryFee: '$0.99 Delivery Fee',
-    rating: 9.9,
-    img: '/placeholder1.jpg'
-  },
-  {
-    id: 5,
-    name: 'Fried Chicken by Ray',
-    prepTime: '30 – 40 mins',
-    deliveryFee: '$0.79 Delivery Fee',
-    rating: 9.4,
-    img: '/placeholder1.jpg'
-  },
-  {
-    id: 6,
-    name: 'Classic Italian by Marco',
-    prepTime: '30 – 40 mins',
-    deliveryFee: '$0.79 Delivery Fee',
-    rating: 9.3,
-    img: '/placeholder1.jpg'
-  },
-];
+import { featuredChefs, nationalFaves } from '@/app/data/restaurants';
 
 export default function ChefsUpPage() {
   const [search, setSearch] = useState('');
   const handleSearchChange = (value: string) => setSearch(value);
+  const searchTerm = search.trim().toLowerCase();
+
+  const filteredFeatured = useMemo(() => {
+    if (!searchTerm) return featuredChefs;
+    return featuredChefs.filter((chef) =>
+      [
+        chef.name,
+        chef.cuisine,
+        chef.chef,
+        chef.highlights.join(' '),
+      ]
+        .join(' ')
+        .toLowerCase()
+        .includes(searchTerm)
+    );
+  }, [searchTerm]);
+
+  const filteredNational = useMemo(() => {
+    if (!searchTerm) return nationalFaves;
+    return nationalFaves.filter((restaurant) =>
+      [
+        restaurant.name,
+        restaurant.cuisine,
+        restaurant.chef,
+        restaurant.highlights.join(' '),
+      ]
+        .join(' ')
+        .toLowerCase()
+        .includes(searchTerm)
+    );
+  }, [searchTerm]);
 
   return (
     <div className="w-full min-h-screen bg-gray-50">
@@ -73,10 +52,12 @@ export default function ChefsUpPage() {
           <p className="mt-1 text-sm text-gray-500">Handpicked options curated for tonight.</p>
 
           <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {chefs.map((chef) => (
-              <div
+            {filteredFeatured.map((chef) => (
+              <Link
                 key={chef.id}
-                className="overflow-hidden rounded-3xl border border-gray-100 bg-white/90 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
+                href={`/main/restaurant/${chef.slug}`}
+                className="block overflow-hidden rounded-3xl border border-gray-100 bg-white/90 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                aria-label={`View ${chef.name} details`}
               >
                 <div className="relative h-36 w-full">
                   <Image
@@ -84,6 +65,7 @@ export default function ChefsUpPage() {
                     alt={chef.name}
                     fill
                     className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </div>
 
@@ -92,12 +74,15 @@ export default function ChefsUpPage() {
                   <p className="text-sm text-gray-600">{chef.prepTime}</p>
                   <p className="text-sm text-gray-600">{chef.deliveryFee}</p>
 
-                  <div className="mt-3 flex items-center gap-2 text-sm">
-                    <span className="text-orange-500">★</span>
-                    <span className="font-semibold text-gray-900">{chef.rating}</span>
+                  <div className="mt-3 flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-2">
+                      <span className="text-orange-500">★</span>
+                      <span className="font-semibold text-gray-900">{chef.rating}</span>
+                    </div>
+                    <span className="text-gray-500">{chef.cuisine}</span>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
@@ -113,10 +98,12 @@ export default function ChefsUpPage() {
           </div>
 
           <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {nationalFaves.map((item) => (
-              <div
+            {filteredNational.map((item) => (
+              <Link
                 key={item.id}
-                className="overflow-hidden rounded-3xl border border-gray-100 bg-white/90 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
+                href={`/main/restaurant/${item.slug}`}
+                className="block overflow-hidden rounded-3xl border border-gray-100 bg-white/90 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                aria-label={`View ${item.name} details`}
               >
                 <div className="relative h-36 w-full">
                   <Image
@@ -124,6 +111,7 @@ export default function ChefsUpPage() {
                     alt={item.name}
                     fill
                     className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </div>
 
@@ -132,12 +120,15 @@ export default function ChefsUpPage() {
                   <p className="text-sm text-gray-600">{item.prepTime}</p>
                   <p className="text-sm text-gray-600">{item.deliveryFee}</p>
 
-                  <div className="mt-3 flex items-center gap-2 text-sm">
-                    <span className="text-orange-500">★</span>
-                    <span className="font-semibold text-gray-900">{item.rating}</span>
+                  <div className="mt-3 flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-2">
+                      <span className="text-orange-500">★</span>
+                      <span className="font-semibold text-gray-900">{item.rating}</span>
+                    </div>
+                    <span className="text-gray-500">{item.cuisine}</span>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
