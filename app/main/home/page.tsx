@@ -9,7 +9,7 @@ const chefs = [
     id: 1,
     name: 'Homestyle Ramen by Aiko',
     prepTime: '30 – 40 mins',
-    deliveryFee: '$1.99 Delivery Fee',
+    deliveryFee: '$1.99 delivery fee',
     rating: 9.7,
     img: '/placeholder1.jpg'
   },
@@ -17,7 +17,7 @@ const chefs = [
     id: 2,
     name: 'Vegan Bento by Mira',
     prepTime: '35 – 45 mins',
-    deliveryFee: '$0 Delivery Fee Over $25',
+    deliveryFee: '$0 delivery fee',
     rating: 9.3,
     img: '/placeholder1.jpg'
   },
@@ -25,7 +25,7 @@ const chefs = [
     id: 3,
     name: 'Sushi Rolls by Kenji',
     prepTime: '40 – 55 mins',
-    deliveryFee: '$1.49 Delivery Fee',
+    deliveryFee: '$1.49 delivery fee',
     rating: 9.5,
     img: '/placeholder1.jpg'
   },
@@ -36,7 +36,7 @@ const nationalFaves = [
     id: 4,
     name: 'Pizza by Sofia',
     prepTime: '25 – 35 mins',
-    deliveryFee: '$0.99 Delivery Fee',
+    deliveryFee: '$0.99 delivery fee',
     rating: 9.9,
     img: '/placeholder1.jpg'
   },
@@ -44,7 +44,7 @@ const nationalFaves = [
     id: 5,
     name: 'Fried Chicken by Ray',
     prepTime: '30 – 40 mins',
-    deliveryFee: '$0.79 Delivery Fee',
+    deliveryFee: '$0.79 delivery fee',
     rating: 9.4,
     img: '/placeholder1.jpg'
   },
@@ -52,7 +52,7 @@ const nationalFaves = [
     id: 6,
     name: 'Classic Italian by Marco',
     prepTime: '30 – 40 mins',
-    deliveryFee: '$0.79 Delivery Fee',
+    deliveryFee: '$0.79 delivery fee',
     rating: 9.3,
     img: '/placeholder1.jpg'
   },
@@ -89,12 +89,14 @@ export default function ChefsUpPage() {
 
                 <div className="space-y-2 p-5">
                   <h3 className="text-lg font-semibold text-gray-900">{chef.name}</h3>
-                  <p className="text-sm text-gray-600">{chef.prepTime}</p>
-                  <p className="text-sm text-gray-600">{chef.deliveryFee}</p>
+                  <p className="text-sm text-gray-600">
+                    {chef.prepTime} <span className="text-gray-400">•</span> {chef.deliveryFee}
+                  </p>
 
                   <div className="mt-3 flex items-center gap-2 text-sm">
                     <span className="text-orange-500">★</span>
                     <span className="font-semibold text-gray-900">{chef.rating}</span>
+                    <span className="text-gray-400">Customer rating</span>
                   </div>
                 </div>
               </div>
@@ -129,12 +131,14 @@ export default function ChefsUpPage() {
 
                 <div className="space-y-2 p-5">
                   <h3 className="text-lg font-semibold text-gray-900">{item.name}</h3>
-                  <p className="text-sm text-gray-600">{item.prepTime}</p>
-                  <p className="text-sm text-gray-600">{item.deliveryFee}</p>
+                  <p className="text-sm text-gray-600">
+                    {item.prepTime} <span className="text-gray-400">•</span> {item.deliveryFee}
+                  </p>
 
                   <div className="mt-3 flex items-center gap-2 text-sm">
                     <span className="text-orange-500">★</span>
                     <span className="font-semibold text-gray-900">{item.rating}</span>
+                    <span className="text-gray-400">Customer rating</span>
                   </div>
                 </div>
               </div>
