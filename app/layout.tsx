@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 
-const uberMove = Inter({
-  variable: "--font-uber-move",
+const appFont = Poppins({
+  variable: "--font-app",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${uberMove.variable} antialiased`}>
+      <body className={`${appFont.variable} antialiased`}>
         {children}
       </body>
     </html>
