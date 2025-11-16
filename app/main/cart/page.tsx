@@ -154,30 +154,47 @@ export default function CartPage() {
             <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <label className="block">
                 <span className="text-sm font-medium text-gray-700">First Name</span>
-                <input className="mt-1 block w-full rounded-md border px-3 py-2" defaultValue="John" />
+               <input
+                  className="mt-1 block w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 px-3 py-2 text-black"
+                  placeholder="John"
+                  defaultValue=""
+                />
               </label>
 
               <label className="block">
                 <span className="text-sm font-medium text-gray-700">Last Name</span>
-                <input className="mt-1 block w-full rounded-md border px-3 py-2" defaultValue="Doe" />
+                <input
+                  className="mt-1 block w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 px-3 py-2 text-black"
+                  placeholder="Doe"
+                  defaultValue=""
+                />
               </label>
 
               <label className="block md:col-span-2">
                 <span className="text-sm font-medium text-gray-700">Street Address</span>
                 <input
-                  className="mt-1 block w-full rounded-md border px-3 py-2"
-                  defaultValue="123 Main Street"
+                  className="mt-1 block w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 px-3 py-2 text-black"
+                  placeholder="123 Road St"
+                  defaultValue=""
                 />
               </label>
 
               <label className="block">
                 <span className="text-sm font-medium text-gray-700">City</span>
-                <input className="mt-1 block w-full rounded-md border px-3 py-2" defaultValue="Anytown" />
+                <input
+                  className="mt-1 block w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 px-3 py-2 text-black"
+                  placeholder="Atlantis"
+                  defaultValue=""
+                />
               </label>
 
               <label className="block">
                 <span className="text-sm font-medium text-gray-700">Postal / ZIP</span>
-                <input className="mt-1 block w-full rounded-md border px-3 py-2" defaultValue="A1B 2C3" />
+                <input
+                  className="mt-1 block w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 px-3 py-2 text-black"
+                  placeholder="A1A 1A1"
+                  defaultValue=""
+                />
               </label>
             </form>
           </div>
@@ -222,12 +239,12 @@ export default function CartPage() {
                   value={promo}
                   onChange={(e) => setPromo(e.target.value)}
                   placeholder="Enter code"
-                  className="flex-1 rounded-md border px-3 py-2"
+                  className="flex-1 rounded-md border px-3 py-2 text-black"
                 />
                 <button
                   onClick={applyPromo}
                   type="button"
-                  className="px-4 py-2 rounded-md bg-white border hover:bg-gray-50"
+                  className="px-4 py-2 rounded-md bg-white border hover:bg-orange-500"
                 >
                   Apply
                 </button>
@@ -247,7 +264,7 @@ export default function CartPage() {
           </div>
 
           <div className="bg-white rounded-xl shadow p-4">
-            <h4 className="font-semibold">Need help?</h4>
+            <h4 className="font-semibold text-black">Need help?</h4>
             <p className="text-sm text-gray-500 mt-2">Contact support or check FAQ.</p>
           </div>
         </aside>
