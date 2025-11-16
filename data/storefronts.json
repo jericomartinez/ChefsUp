@@ -1,0 +1,22 @@
+{
+  "asdnoad@gmail.com": {
+    "name": "asd",
+    "description": "asd",
+    "coverImage": null,
+    "items": [
+      {
+        "id": 1,
+        "name": "asd",
+        "description": "asd",
+        "price": "123"
+      },
+      {
+        "id": 2,
+        "name": "kgopasgpa",
+        "description": "123123",
+        "price": "123"
+      }
+    ],
+    "updatedAt": "2025-11-16T11:27:46.751Z"
+  }
+}

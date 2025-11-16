@@ -1,9 +1,27 @@
+'use client';
+
 import Link from 'next/link';
+import { FormEvent, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const inputClasses =
   'w-full rounded-2xl border border-gray-200 bg-white/80 px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-100';
 
 export default function ChefSignupPage() {
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!email) return;
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('chefsup-current-email', email);
+    }
+
+    router.push(`/chef/create?email=${encodeURIComponent(email)}`);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-orange-50 to-orange-100">
       <div className="mx-auto flex min-h-screen w-full max-w-5xl flex-col px-4 py-10">
@@ -22,7 +40,10 @@ export default function ChefSignupPage() {
           </Link>
         </header>
 
-        <div className="flex flex-1 flex-col gap-8 rounded-[32px] bg-white/80 p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] lg:flex-row">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-1 flex-col gap-8 rounded-[32px] bg-white/80 p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] lg:flex-row"
+        >
           <section className="flex-1 space-y-5">
             <h2 className="text-xl font-semibold text-gray-900">About you</h2>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -37,7 +58,14 @@ export default function ChefSignupPage() {
             </div>
             <label className="space-y-1 text-sm font-medium text-gray-700">
               Email
-              <input type="email" placeholder="you@example.com" className={inputClasses} />
+              <input
+                type="email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                className={inputClasses}
+                required
+              />
             </label>
             <label className="space-y-1 text-sm font-medium text-gray-700">
               Phone number
@@ -76,19 +104,19 @@ export default function ChefSignupPage() {
                 I agree to ChefsUp&apos;s community guidelines and food safety policies.
               </label>
 
-              <Link
-                href="/chef/create"
-                className="flex w-full items-center justify-center rounded-full bg-orange-500 py-3 text-sm font-semibold text-white shadow-[0_15px_35px_rgba(249,115,22,0.35)] transition hover:bg-orange-600"
+              <button
+                type="submit"
+                className="w-full rounded-full bg-orange-500 py-3 text-sm font-semibold text-white shadow-[0_15px_35px_rgba(249,115,22,0.35)] transition hover:bg-orange-600"
               >
                 Submit application
-              </Link>
+              </button>
 
               <p className="text-center text-xs text-gray-500">
                 We review every application manually. Expect an email within 2-3 business days.
               </p>
             </div>
           </section>
-        </div>
+        </form>
       </div>
     </div>
   );
